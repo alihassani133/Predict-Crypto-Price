@@ -1,4 +1,6 @@
-﻿using Exercise8_PredictPrice.Operatons;
+﻿//علی حسنی - Ali Hassani
+
+using Exercise8_PredictPrice.Operatons;
 
 string cryptoKey = "";
 string filePath = @"E:\Csharp Projects\College\Prices.csv";
