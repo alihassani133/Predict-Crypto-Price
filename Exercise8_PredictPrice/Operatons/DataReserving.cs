@@ -12,16 +12,19 @@ namespace Exercise8_PredictPrice.Operatons
     {
         public static async Task<Tuple<double[], DateTime[]>> GetCryptoPrices(string cryptoKey)
         {
-            double[] prices = new double[3];
-            DateTime[] times = new DateTime[3];    
-            for (int i = 0; i < 3; i++)
+            double[] prices = new double[61];
+            DateTime[] times = new DateTime[61];    
+            for (int i = 0; i < 61; i++)
             {
                 string content = await APIHandler.GetApiContent(cryptoKey);
                 double price = (double)JsonHandler.JsonToObjectConverter(content);
                 times[i] = DateTime.Now;
                 prices[i] = price;
-                Console.WriteLine(price);
-                Thread.Sleep(60000);
+                if (i != 60)
+                {
+                    Console.WriteLine($"{i + 1}: " + price);
+                    await Task.Delay(60000);
+                }
             }
             return Tuple.Create(prices, times);
         }

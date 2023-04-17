@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Exercise8_PredictPrice.Operatons
+﻿namespace Exercise8_PredictPrice.Operatons
 {
     class UserInterface
     {
@@ -28,6 +22,5 @@ namespace Exercise8_PredictPrice.Operatons
             Console.WriteLine(finalInput);
             return finalInput;
         }
-
     }
 }

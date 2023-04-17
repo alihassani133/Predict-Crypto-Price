@@ -16,7 +16,7 @@ namespace Exercise8_PredictPrice.Operatons
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Add("X-API-Key", "4018|wmfw5HLzBKBsro5v6dHLhl9xXuyRXKIgAc1D5Sxx");
+                httpClient.DefaultRequestHeaders.Add("X-API-Key", "4258|gbpz7Dfg8FIs1XTDaXVMOnLAoP1RzwCbzNA4urzE");
                 var response = await httpClient.GetAsync("https://api.wallex.ir/v1/currencies/stats/?key=" + cryptoKey);
 
                 if (response.IsSuccessStatusCode)

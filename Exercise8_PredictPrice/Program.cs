@@ -31,19 +31,28 @@ switch (keyIndex)
         cryptoKey = "USDT";
         break;
 }
+for (int i = 2; i < 11; i++)
+{
+    var data = await DataReserving.GetCryptoPrices(cryptoKey);
+    DataReserving.SavePricesToCsv(data.Item1.Take(data.Item1.Length - 1).ToArray(), data.Item2.Take(data.Item1.Length - 1).ToArray());
+
+    Console.WriteLine($"The actual next price: {(decimal)data.Item1[data.Item1.Length - 1]}\n");
+    decimal nextPrice = Analysis.PredictByLineRegression(filePath);
+    Console.WriteLine("prediction by line regression: " + nextPrice);
+    var errorPercentage1 = Analysis.ErrorPercentage((decimal)data.Item1[data.Item1.Length - 1], nextPrice);
+    Console.WriteLine($"the error percentage of this prediction algorithm: {errorPercentage1}%\n \n");
 
 
-var data = await DataReserving.GetCryptoPrices(cryptoKey);
-DataReserving.SavePricesToCsv(data.Item1.Take(data.Item1.Length - 1).ToArray(), data.Item2.Take(data.Item1.Length - 1).ToArray());
+    decimal nextPrice2 = Analysis.PredictByMovingAverage(filePath);
+    Console.WriteLine("prediction by moving average: " + nextPrice2);
+    var errorPercentage2 = Analysis.ErrorPercentage((decimal)data.Item1[data.Item1.Length - 1], nextPrice2);
+    Console.WriteLine($"the error percentage of this prediction algorithm: {errorPercentage2}%");
 
+    string fileName = $"Screenshot{i}.png";
+    ScreenShot.Capture(fileName);
 
-decimal nextPrice = Analysis.PredictByLineRegression(filePath);
-Console.WriteLine("by line regression: " + nextPrice);
-var errorPercentage1 = Analysis.ErrorPercentage((decimal)data.Item1[data.Item1.Length - 1], nextPrice);
-Console.WriteLine($"the error percentage of this prediction algorithm: {errorPercentage1}%");
-decimal nextPrice2 = Analysis.PredictByMovingAverage(filePath);
-Console.WriteLine("by moving average: " + nextPrice2);
-var errorPercentage2 = Analysis.ErrorPercentage((decimal)data.Item1[data.Item1.Length - 1], nextPrice2);
-Console.WriteLine($"the error percentage of this prediction algorithm: {errorPercentage2}%");
+    Console.Clear();
+}
+
 
 

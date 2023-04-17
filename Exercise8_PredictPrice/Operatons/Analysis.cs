@@ -19,7 +19,7 @@ namespace Exercise8_PredictPrice.Operatons
                            })
                            .ToArray();
             double[] prices = data.Select(x => x.Price).ToArray();
-            int windowSize = 2;
+            int windowSize = 60;
             if (prices.Length < windowSize)
             {
                 throw new ArgumentException("Not enough prices to calculate Moving Average.");
