@@ -50,7 +50,7 @@ for (int i = 2; i < 11; i++)
 
     string fileName = $"Screenshot{i}.png";
     ScreenShot.Capture(fileName);
-
+    Thread.Sleep(5000);
     Console.Clear();
 }
 
