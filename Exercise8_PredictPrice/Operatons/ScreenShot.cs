@@ -10,9 +10,15 @@ namespace Exercise8_PredictPrice.Operatons
 {
     class ScreenShot
     {
-        public static void Capture(string fileName)
+        readonly string _filePath;
+        public ScreenShot(string filePath)
         {
-            string filePath = @"E:\Csharp Projects\College\ProjectsExportedData\Exercise8\" + fileName;
+            _filePath = filePath;
+        }
+
+        public void Capture(string filename)
+        {
+            string filePath = _filePath + filename;
             // Create a bitmap to hold the screenshot
             using (Bitmap bitmap = new(1920, 1080))
             {
@@ -28,7 +34,6 @@ namespace Exercise8_PredictPrice.Operatons
                     // Save the cropped bitmap to a file
                     croppedBitmap.Save(filePath, ImageFormat.Png);
                 }
-                // Save the bitmap to a file
             }
         }
     }

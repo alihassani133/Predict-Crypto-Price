@@ -1,6 +1,6 @@
 ﻿namespace Exercise8_PredictPrice.Operatons
 {
-    class UserInterface
+    class LockKeyboard
     {
         public static string ControlUserInput()
         {

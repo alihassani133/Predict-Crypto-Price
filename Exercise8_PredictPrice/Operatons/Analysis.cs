@@ -1,13 +1,20 @@
 ﻿using MathNet.Numerics.LinearRegression;
+using System.Reflection.Metadata;
 
 namespace Exercise8_PredictPrice.Operatons
 {
     class Analysis
     {
-        //predict price using moving average algorithm
-        public static decimal PredictByMovingAverage(string filePath)
+        readonly string _filePath;
+        public Analysis(string filepath)
         {
-            var data = File.ReadAllLines(filePath)
+            _filePath = filepath;
+        }
+
+        //predict price using moving average algorithm
+        public decimal PredictByMovingAverage()
+        {
+            var data = File.ReadAllLines(_filePath)
                            .Select(x =>
                            {
                                var values = x.Split(',');
@@ -33,9 +40,9 @@ namespace Exercise8_PredictPrice.Operatons
             return nextPrice;
         }
         //predict price using moving line regression algorithm
-        public static decimal PredictByLineRegression(string filePath)
+        public decimal PredictByLineRegression()
         {
-            var data = File.ReadAllLines(filePath)
+            var data = File.ReadAllLines(_filePath)
                            .Select(x =>
                            {
                                var values = x.Split(',');
@@ -78,12 +85,6 @@ namespace Exercise8_PredictPrice.Operatons
 
             return predictedPrice;
         }
-        public static decimal ErrorPercentage(decimal actualPrice, decimal predictedPrice)
-        {
-            // calculate error percentage
-            decimal errorPercentage = Math.Abs(actualPrice - predictedPrice) / actualPrice * 100;
-            return errorPercentage;
-        } 
     }
 
 }
