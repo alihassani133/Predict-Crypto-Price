@@ -18,7 +18,7 @@ namespace Exercise8_PredictPrice.Operatons
 
         public void Capture(string filename)
         {
-            string filePath = _filePath + filename;
+            string filepath = Path.Combine(_filePath, filename);
             // Create a bitmap to hold the screenshot
             using (Bitmap bitmap = new(1920, 1080))
             {
@@ -32,7 +32,7 @@ namespace Exercise8_PredictPrice.Operatons
                 using (Bitmap croppedBitmap = bitmap.Clone(bounds, bitmap.PixelFormat))
                 {
                     // Save the cropped bitmap to a file
-                    croppedBitmap.Save(filePath, ImageFormat.Png);
+                    croppedBitmap.Save(filepath, ImageFormat.Png);
                 }
             }
         }

@@ -3,10 +3,10 @@ using System.Reflection.Metadata;
 
 namespace Exercise8_PredictPrice.Operatons
 {
-    class Analysis
+    class Prediction
     {
         readonly string _filePath;
-        public Analysis(string filepath)
+        public Prediction(string filepath)
         {
             _filePath = filepath;
         }

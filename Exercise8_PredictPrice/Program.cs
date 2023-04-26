@@ -3,11 +3,12 @@
 using Exercise8_PredictPrice.Operatons;
 
 string cryptoKey = "";
-string filepath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "Prices.csv";
+string desktoppath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+string filepath = Path.Combine(desktoppath, "Prices.csv");
 
-Analysis analysis = new(filepath);
+Prediction prediction = new(filepath);
 SavingToFile savingToFile = new(filepath);
-ScreenShot screenShot = new(filepath);
+ScreenShot screenShot = new(desktoppath);
 
 Console.WriteLine("Please choose which crypto do you want to get prices of it and predict its next price?");
 Console.WriteLine("For Bitcoin press number 1,\n" +
@@ -34,19 +35,20 @@ switch (keyIndex)
         cryptoKey = "USDT";
         break;
 }
-for (int i = 2; i < 11; i++)
+for (int i = 1; i < 11; i++)
 {
     var data = await DataReserving.ReserveCryptoData(cryptoKey);
     savingToFile.SavePricesToCsv(data.Item1.Take(data.Item1.Length - 1).ToArray(), data.Item2.Take(data.Item1.Length - 1).ToArray());
 
     Console.WriteLine($"The actual next price: {(decimal)data.Item1[^1]}\n");
-    decimal nextPrice = analysis.PredictByLineRegression();
+
+    decimal nextPrice = prediction.PredictByLineRegression();
     Console.WriteLine("prediction by line regression: " + nextPrice);
     var errorPercentage1 = ErrorPercentage.PercentError((decimal)data.Item1[^1], nextPrice);
     Console.WriteLine($"the error percentage of this prediction algorithm: {errorPercentage1}%\n \n");
 
 
-    decimal nextPrice2 = analysis.PredictByMovingAverage();
+    decimal nextPrice2 = prediction.PredictByMovingAverage();
     Console.WriteLine("prediction by moving average: " + nextPrice2);
     var errorPercentage2 = ErrorPercentage.PercentError((decimal)data.Item1[^1], nextPrice2);
     Console.WriteLine($"the error percentage of this prediction algorithm: {errorPercentage2}%");

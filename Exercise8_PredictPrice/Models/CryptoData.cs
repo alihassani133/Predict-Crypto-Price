@@ -70,11 +70,11 @@ namespace Exercise8_PredictPrice.Models
         [JsonProperty("price_change_1y")]
         public double LastYearPriceChange { get; set; }
         [JsonProperty("max_supply")]
-        public int MaxSupply { get; set; }
+        public double? MaxSupply { get; set; }
         [JsonProperty("total_supply")]
-        public int TotalSupply { get; set; }
+        public double? TotalSupply { get; set; }
         [JsonProperty("circulating_supply")]
-        public int CirculatingSupply { get; set; }
+        public double? CirculatingSupply { get; set; }
         [JsonProperty("created_at")]
         public DateTime CreatingDate { get; set; }
         [JsonProperty("updated_at")]
